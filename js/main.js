@@ -1,12 +1,12 @@
 const indexUrl = '/data/index.json';
 
-function fetchJson(url, callback) {
+const fetchJson = (url, callback) => {
     fetch(url)
     .then(response => response.json())
     .then(data => callback(data))
-}
+};
 
-function appendContents(contents) {
+const appendContents = (contents) => {
     contents.forEach(content => {
         let article = document.createElement("div");
         content.forEach(paragraph => {
@@ -16,10 +16,10 @@ function appendContents(contents) {
         })
         document.body.appendChild(article);
     });
-}
+};
 
-function main() {
-    let index = (indexJson) => {
+const main = async () => {
+    const index = (indexJson) => {
         let total = indexJson.total;
         for(i = 1; i <= total; i++) {
             let callback = (contents) => {
@@ -29,6 +29,6 @@ function main() {
         }
     }
     fetchJson(indexUrl, index);
-}
+};
 
 window.onload = main;
