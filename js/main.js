@@ -29,6 +29,10 @@ const main = async () => {
         }
     }
     fetchJson(indexUrl, index);
+    document.getElementById('btn').onclick = () => {
+        input = document.getElementById('xxx');
+        location.href = input.value;
+    }
 };
 
 window.onload = main;
