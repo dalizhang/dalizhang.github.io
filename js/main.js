@@ -1,9 +1,9 @@
 const indexUrl = '/data/index.json';
 
-const fetchJson = (url, callback) => {
+const fetchJson = async (url, callback) => {
     fetch(url)
-    .then(response => response.json())
-    .then(data => callback(data))
+        .then(response => response.json())
+        .then(data => callback(data))
 };
 
 const appendContents = (contents) => {
@@ -19,18 +19,18 @@ const appendContents = (contents) => {
 };
 
 const main = async () => {
-    const index = (indexJson) => {
+    const onIndexReturn = (indexJson) => {
         let total = indexJson.total;
-        for(i = 1; i <= total; i++) {
+        for (let i = 1; i <= total; i++) {
             let callback = (contents) => {
                 appendContents(contents)
             }
             fetchJson('/data/' + i + '.json', callback)
         }
     }
-    fetchJson(indexUrl, index);
+    await fetchJson(indexUrl, onIndexReturn);
     document.getElementById('btn').onclick = () => {
-        input = document.getElementById('xxx');
+        const input = document.getElementById('xxx');
         location.href = input.value;
     }
 };
